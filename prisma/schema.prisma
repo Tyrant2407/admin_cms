@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum ServiceType {
+  training
+  automation
+  both
+}
+
+model Lead {
+  id            String      @id @default(uuid())
+  name          String      @db.VarChar(100)
+  whatsapp      String      @db.VarChar(20)
+  email         String      @db.VarChar(100)
+  serviceType   ServiceType @map("service_type")
+  projectDetail String      @map("project_detail") @db.Text
+  createdAt     DateTime    @default(now()) @map("created_at")
+
+  @@map("leads")
+}
+
+model CMSContent {
+  id        String   @id @default(uuid())
+  section   String   @unique @db.VarChar(50)
+  content   Json
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("cms_content")
+}
+
+model AdminUser {
+  id           String   @id @default(uuid())
+  email        String   @unique @db.VarChar(100)
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("admin_users")
+}

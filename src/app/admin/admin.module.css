@@ -1,0 +1,35 @@
+.adminLayout {
+  min-height: 100vh;
+}
+
+.adminBody {
+  margin-left: var(--sidebar-width);
+  min-height: 100vh;
+  transition: margin-left var(--transition-base);
+  position: relative;
+  z-index: 1;
+}
+
+.adminBodyCollapsed {
+  margin-left: var(--sidebar-collapsed);
+}
+
+.adminContent {
+  padding: 32px;
+  max-width: 1200px;
+}
+
+@media (max-width: 1024px) {
+  .adminBody {
+    margin-left: 0;
+    padding-top: 60px;
+  }
+
+  .adminBodyCollapsed {
+    margin-left: 0;
+  }
+
+  .adminContent {
+    padding: 24px 16px;
+  }
+}
