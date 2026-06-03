@@ -10,7 +10,7 @@ const pool = new Pool({
   connectionString: connectionString || 'postgresql://dummy:dummy@localhost:5432/dummy',
   max: 10,
   idleTimeoutMillis: 30000,
-  connectionTimeoutMillis: 2000,
+  connectionTimeoutMillis: 10000,
 });
 
 // Create the PrismaPg adapter
