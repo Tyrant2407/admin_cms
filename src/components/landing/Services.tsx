@@ -1,21 +1,20 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { getCMSContent } from '@/lib/api';
+import { getCMSContent, getDefaultCMSContent } from '@/lib/api';
 import styles from './Services.module.css';
 import { useEffect, useState } from 'react';
 import type { CMSServicesContent } from '@/lib/types';
 
 export default function Services() {
-  const [content, setContent] = useState<CMSServicesContent | null>(null);
+  const defaults = getDefaultCMSContent();
+  const [content, setContent] = useState<CMSServicesContent>(defaults.services);
 
   useEffect(() => {
     getCMSContent().then(cms => {
       setContent(cms.services);
     });
   }, []);
-
-  if (!content) return null;
 
   const scrollTo = (href: string) => {
     const el = document.querySelector(href);

@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { getCMSContent } from '@/lib/api';
+import { getCMSContent, getDefaultCMSContent } from '@/lib/api';
 import styles from './Hero.module.css';
 import { useEffect, useState } from 'react';
 import type { CMSHeroContent } from '@/lib/types';
@@ -16,15 +16,14 @@ const fadeUp = {
 };
 
 export default function Hero() {
-  const [content, setContent] = useState<CMSHeroContent | null>(null);
+  const defaults = getDefaultCMSContent();
+  const [content, setContent] = useState<CMSHeroContent>(defaults.hero);
 
   useEffect(() => {
     getCMSContent().then(cms => {
       setContent(cms.hero);
     });
   }, []);
-
-  if (!content) return null;
 
   const scrollTo = (href: string) => {
     const el = document.querySelector(href);

@@ -1,12 +1,14 @@
 'use client';
 
+import dynamic from 'next/dynamic';
 import Navbar from '@/components/landing/Navbar';
 import Hero from '@/components/landing/Hero';
-import Services from '@/components/landing/Services';
-import HowItWorks from '@/components/landing/HowItWorks';
-import FAQ from '@/components/landing/FAQ';
-import LeadForm from '@/components/landing/LeadForm';
 import Footer from '@/components/landing/Footer';
+
+const Services = dynamic(() => import('@/components/landing/Services'));
+const HowItWorks = dynamic(() => import('@/components/landing/HowItWorks'));
+const FAQ = dynamic(() => import('@/components/landing/FAQ'));
+const LeadForm = dynamic(() => import('@/components/landing/LeadForm'));
 
 export default function Home() {
   return (

@@ -151,9 +151,11 @@ export default function LeadForm() {
           <form onSubmit={handleSubmit} className={styles.form} noValidate>
             {/* Honeypot */}
             <div className={styles.honeypot}>
+              <label htmlFor="honeypot-field" className="sr-only">Leave this empty</label>
               <input
                 type="text"
                 name="honeypot"
+                id="honeypot-field"
                 value={formData.honeypot}
                 onChange={handleChange}
                 tabIndex={-1}
@@ -214,6 +216,7 @@ export default function LeadForm() {
 
             {/* Service Type */}
             <div className="form-group">
+              <label htmlFor="form-service" className="sr-only">Service Type</label>
               <select
                 name="serviceType"
                 id="form-service"

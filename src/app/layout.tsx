@@ -1,6 +1,28 @@
 import type { Metadata } from "next";
+import { Syne, DM_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
+
+const syne = Syne({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+  variable: "--font-display",
+});
+
+const dmSans = DM_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-body",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+  variable: "--font-mono",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -47,9 +69,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
+      <body className={`${syne.variable} ${dmSans.variable} ${jetbrainsMono.variable}`}>
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
 }
+

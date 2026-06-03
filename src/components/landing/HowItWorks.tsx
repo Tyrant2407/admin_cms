@@ -1,21 +1,20 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { getCMSContent } from '@/lib/api';
+import { getCMSContent, getDefaultCMSContent } from '@/lib/api';
 import styles from './HowItWorks.module.css';
 import { useEffect, useState } from 'react';
 import type { CMSHowItWorksContent } from '@/lib/types';
 
 export default function HowItWorks() {
-  const [content, setContent] = useState<CMSHowItWorksContent | null>(null);
+  const defaults = getDefaultCMSContent();
+  const [content, setContent] = useState<CMSHowItWorksContent>(defaults.howItWorks);
 
   useEffect(() => {
     getCMSContent().then(cms => {
       setContent(cms.howItWorks);
     });
   }, []);
-
-  if (!content) return null;
 
   return (
     <section className={styles.howItWorks} id="how-it-works">

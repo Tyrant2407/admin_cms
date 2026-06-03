@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { getCMSContent } from '@/lib/api';
+import { getCMSContent, getDefaultCMSContent } from '@/lib/api';
 import styles from './FAQ.module.css';
 import type { CMSFAQContent } from '@/lib/types';
 
 export default function FAQ() {
-  const [content, setContent] = useState<CMSFAQContent | null>(null);
+  const defaults = getDefaultCMSContent();
+  const [content, setContent] = useState<CMSFAQContent>(defaults.faq);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useEffect(() => {
@@ -15,8 +16,6 @@ export default function FAQ() {
       setContent(cms.faq);
     });
   }, []);
-
-  if (!content) return null;
 
   const toggle = (index: number) => {
     setOpenIndex(prev => prev === index ? null : index);

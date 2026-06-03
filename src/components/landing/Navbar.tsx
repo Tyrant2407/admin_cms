@@ -34,7 +34,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`} id="navbar">
+      <nav className={`${styles.navbar} ${scrolled ? styles.navbarScrolled : ''}`} id="navbar" aria-label="Main navigation">
         <div className={styles.navInner}>
           <a href="/" className={styles.logo}>
             <span className={styles.logoIcon}>⚡</span>
@@ -90,9 +90,13 @@ export default function Navbar() {
         <div
           className={`${styles.mobileOverlay} ${mobileOpen ? styles.mobileOverlayVisible : ''}`}
           onClick={() => setMobileOpen(false)}
+          role="button"
+          aria-label="Close navigation menu"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setMobileOpen(false); }}
         />
       )}
-      <div className={`${styles.mobileDrawer} ${mobileOpen ? styles.mobileDrawerOpen : ''}`}>
+      <div className={`${styles.mobileDrawer} ${mobileOpen ? styles.mobileDrawerOpen : ''}`} role="navigation" aria-label="Mobile navigation">
         {navItems.map((item) => (
           <button
             key={item.href}
