@@ -4,13 +4,10 @@ import { Pool } from 'pg';
 
 const connectionString = process.env.DATABASE_URL;
 
-if (!connectionString) {
-  throw new Error('DATABASE_URL environment variable is not defined. Please set it in your .env file.');
-}
-
-// Create a standard pg pool
+// On Vercel build time, DATABASE_URL might not be defined.
+// We fallback to a dummy connection string to prevent Next.js from failing the build phase.
 const pool = new Pool({
-  connectionString,
+  connectionString: connectionString || 'postgresql://dummy:dummy@localhost:5432/dummy',
   max: 10,
   idleTimeoutMillis: 30000,
   connectionTimeoutMillis: 2000,
